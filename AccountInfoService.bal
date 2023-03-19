@@ -21,6 +21,4 @@ service /accounts on new http:Listener(9090) {
     resource function get [string accountNumber]() returns Account {
         return accounts.get(accountNumber);
     }
-
-    
 }

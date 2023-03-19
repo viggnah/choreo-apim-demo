@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Accounts
+  version: 0.1.0
+servers:
+- url: "{server}:{port}/accounts"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9090"
+paths:
+  /:
+    post:
+      operationId: post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /{accountNumber}:
+    get:
+      operationId: getAccountnumber
+      parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+components:
+  schemas:
+    Account:
+      required:
+      - accountName
+      - accountNumber
+      - balance
+      - currency
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        balance:
+          type: number
+          format: float
+        currency:
+          type: string
